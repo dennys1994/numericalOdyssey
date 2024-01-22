@@ -1,48 +1,61 @@
-Personagem player;
+
 int estadoSystem = 0;//estado 0 = menu ; estado 1 = jogando
-int x=0, y=0;// posicao inicial do personagem
-int numFotos = 11;
-PImage[] introJogo = new PImage[numFotos];
-int fotoAtual = 0;
 
 void setup() {
-  size(400, 400);
-  personagemPrincipalMove = loadImage("data/char_move.png");
-  dividirImagem(578, 256, 9, 4);//dimesao da img  e tamanho da matriz
-  player = new Personagem(quadros, 0, 0);
-  size(800, 600);
+  size(480, 320);
+  background(0);
+
+  //Carrega elementos do menu
   criarMenu();
   // Carrega as imagens da intro
-  for (int i = 0; i < numFotos; i++) {
-    introJogo[i] = loadImage(i + 1 + ".png");
-  }
-
+  criarIntro();
+  //Carrega imgs do personagem
+  criarPersonagem();
+  //carrega elementos do mapa
+  carregarImgElementos();
+  //cria o mapa
+  matrizMapa.criarMapa();
 }
 
 void draw() {
-  
-  background(255);
+
+  background(192, 232, 64);
   // player.mostrar();
   if (estadoSystem == 0) {
-    // Exibe o título do jogo
-    fill(0, 0, 255);
-    textAlign(CENTER, CENTER);
-    textSize(20);
-    text("Odisseia Numérica\n Uma Aventura Além da Matemática\n\n", width / 2, 50);
-
+    mostrarTitulo();
     mostrarMenu();
+  } else if (estadoSystem == 1) {
+    if (fotoAtual >= 0 && fotoAtual <= 10)
+      image(introJogo[fotoAtual], 0, 0, width, height);//quando aperta SPACE troca pra proxima img
+    else {
+      matrizMapa.exibirMatriz();
+      player.mostrar();
+     // rect(player.x,player.y,5,5);
+     // println("Pos char x: ",player.x,"y: ",player.y);
+     // println("Pos bloco x: ",player.x/32,"y: ",player.y/32);
+    }
   }
-  else if(estadoSystem == 1){
-    if(fotoAtual >= 0 && fotoAtual <= 10) 
-      image(introJogo[fotoAtual], 0, 0, width, height);
-    else
-      player.mostrar();    
-}
 }
 void keyPressed() {
-  moverPersonagemPrincipal();
+  player.moverPersonagemPrincipal();
   if (key == ' ') {
     // Avança para a próxima imagem
     fotoAtual = (fotoAtual + 1);
+    if(fotoAtual>10)
+      player.correr();
   }
+  if (key == 'o') {
+    player.atualizarPos(240, 160);
+  }
+}
+
+void keyReleased(){
+ if(key == ' ')
+   player.andar();
+}
+
+void mousePressed() {
+  //clicar no menu
+  if (estadoSystem == 0)
+    cliqueOpcao();
 }

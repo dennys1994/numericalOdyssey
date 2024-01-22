@@ -33,7 +33,8 @@ class MenuOption {
 
 ArrayList<MenuOption> menuOptions;
 int selectedOptionIndex = -1;
-void mousePressed() {
+
+void cliqueOpcao(){
   if(estadoSystem == 0)
   for (int i = 0; i < menuOptions.size(); i++) {
     if (menuOptions.get(i).isMouseOver()) {
