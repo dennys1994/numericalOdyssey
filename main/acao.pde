@@ -16,18 +16,37 @@ void acaoEspecial(int x, int y){
    player.interacaoPersonagem = 0;
  }
  else if(matrizMapa.matrizCodColisao[x][y] == 5){
+   dialogo = 1;
+   partHistoria = 1;
  }
  else if(matrizMapa.matrizCodColisao[x][y] == 6){
+   matrizMapa.mapaPart4();
+   player.atualizaPos(6,8);
+   npc.atualizaPos(6,3);
+   npc.acaoAtual = 3;
+   npc.frameAtual = 22;
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 7){
+   matrizMapa.mapaPart3();
+   npc.acaoAtual = -1;
  }
 }
 
 void story(){
-  String[] texto = {
+  String[] texto1 = {
       "Oi Alex, seja bem vindo ao mundo da matematica! ",
       "Vejo que voce esta perdido hahaha, vou te ",
       " Falar um pouco sobre esse mundo",
       "Me siga..."
     };
   if(partHistoria == 0)
-    criarDialogo(texto, 4, npc);
+    criarDialogo(texto1, 4, npc, 1);//string, linhas, npc, prox acao do npc se nao houver sera -1
+  else if(partHistoria == 1){
+    String[] texto2 = {
+      "Entao alex, vou te ensinar o basico",
+      "de matematica, para voce sobreviver",
+      "vamos aos calculos..."
+    };
+    criarDialogo(texto2, 3, npc, 4);
+  }
 }

@@ -2,13 +2,13 @@
 Personagem player;
 
 void criarPersonagem() {
-  //player = new Personagem(4, 9, tamanhoElementoPx*13-12, tamanhoElementoPx*4-12, loadImage("data/char_move.png"));
-  player = new Personagem(4, 9, 8, 7, loadImage("data/char_move.png"));
+  player = new Personagem(4, 9, 8, 7, loadImage("data/char_move.png"), loadImage("data/personagens/alex1.png"));
   player.dividirFlames(578, 256, 9, 4);//dimesao da img  e tamanho da matriz
 }
 
 class Personagem {
   PImage[] quadros;//frames do personagem
+  PImage luta;
   PImage splite;//imagem com todos os frames
   int x, y;
   //int larguraQuadro, alturaQuadro;
@@ -17,13 +17,14 @@ class Personagem {
   int interacaoPersonagem = 1;//se ele pode se mover
   int andar = 0; //1 cima 2 baixo 3 direita 4 esquerda
   int acaoAtual = 0;//para quando tiver uma acao especial
-  Personagem(int linhas, int colunas, int x, int y, PImage splite) {
+  Personagem(int linhas, int colunas, int x, int y, PImage splite, PImage luta) {
     this.quadros = new PImage[linhas*colunas];
     this.x = x*tamanhoElementoPx-tamanhoElementoPx/2;
     this.y = y*tamanhoElementoPx+tamanhoElementoPx/2;
     //this.larguraQuadro = colunas;
     //this.alturaQuadro = linhas;
     this.splite = splite;
+    this.luta = luta;
   }
 
   void mostrar() {//Funcao que mostra o personagem na pos x,y

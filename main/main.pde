@@ -39,6 +39,9 @@ void draw() {
      
     }
   }
+  else if (estadoSystem == 2){//modo batalha ohhhhh
+    mostrarBatalha();
+  }
 }
 void keyPressed() {
   player.moverPersonagem();
@@ -46,13 +49,12 @@ void keyPressed() {
     // Avança para a próxima imagem
     fotoAtual = (fotoAtual + 1);
     if(fotoAtual>11){
-      player.correr();
       contador = 0;
       indiceDialogo++;
     }
   }
-  if (key == 'o') {
-    player.atualizaPos(240, 160);
+  if (key == 'e') {
+    player.correr();
   }
 }
 

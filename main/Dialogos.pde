@@ -4,7 +4,7 @@ int comprimentoAtual = 1;
 int contador = 0;
 int indiceDialogo = 0;
 
-void criarDialogo(String[] texto, int linhas, Personagem npcAct){
+void criarDialogo(String[] texto, int linhas, Personagem npcAct, int acao){//recebe o texto que o npc ira falar, o numero de linhas desse texto, qual npc, e qual acao o npc deve torma na sequencia
   if(dialogo != 0){
     fill(255);
     rect(240,272,14*32,2*32,5);
@@ -12,9 +12,8 @@ void criarDialogo(String[] texto, int linhas, Personagem npcAct){
       indiceDialogo = 0;
       contador = 0;
       dialogo = 0;
-      matrizMapa.mapaPart2();
       player.interacaoPersonagem = 1;
-      npcAct.acaoAtual = 1;
+      npcAct.acaoAtual = acao;
     }
     else
       mostrarTexto(texto[indiceDialogo]);
