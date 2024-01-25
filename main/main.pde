@@ -1,9 +1,10 @@
 
 int estadoSystem = 0;//estado 0 = menu ; estado 1 = jogando
-
+int partHistoria = 0;//para sabermos em qual parte da historia esta
+color background;
 void setup() {
   size(480, 320);
-  background(0);
+  background(255);
 
   //Carrega elementos do menu
   criarMenu();
@@ -11,15 +12,15 @@ void setup() {
   criarIntro();
   //Carrega imgs do personagem
   criarPersonagem();
+  criarNpc();
   //carrega elementos do mapa
   carregarImgElementos();
   //cria o mapa
-  matrizMapa.criarMapa();
+  matrizMapa.mapaPart1();
 }
 
 void draw() {
-
-  background(192, 232, 64);
+  background(background);
   // player.mostrar();
   if (estadoSystem == 0) {
     mostrarTitulo();
@@ -29,23 +30,29 @@ void draw() {
       image(introJogo[fotoAtual], 0, 0, width, height);//quando aperta SPACE troca pra proxima img
     else {
       matrizMapa.exibirMatriz();
+      acaoNpc();
       player.mostrar();
+      story();
      // rect(player.x,player.y,5,5);
      // println("Pos char x: ",player.x,"y: ",player.y);
-     // println("Pos bloco x: ",player.x/32,"y: ",player.y/32);
+      println("Pos bloco x: ",player.x/32,"y: ",player.y/32, "vel char: ", (player.y+player.velChar)/32);
+     
     }
   }
 }
 void keyPressed() {
-  player.moverPersonagemPrincipal();
+  player.moverPersonagem();
   if (key == ' ') {
     // Avança para a próxima imagem
     fotoAtual = (fotoAtual + 1);
-    if(fotoAtual>10)
+    if(fotoAtual>11){
       player.correr();
+      contador = 0;
+      indiceDialogo++;
+    }
   }
   if (key == 'o') {
-    player.atualizarPos(240, 160);
+    player.atualizaPos(240, 160);
   }
 }
 
