@@ -17,6 +17,8 @@ void setup() {
   carregarImgElementos();
   //cria o mapa
   matrizMapa.mapaPart1();
+  //cria a primeira expressao matematica
+  gerarExpressao();
 }
 
 void draw() {
@@ -33,34 +35,51 @@ void draw() {
       acaoNpc();
       player.mostrar();
       story();
-     // rect(player.x,player.y,5,5);
-     // println("Pos char x: ",player.x,"y: ",player.y);
-      println("Pos bloco x: ",player.x/32,"y: ",player.y/32, "vel char: ", (player.y+player.velChar)/32);
-     
+      // rect(player.x,player.y,5,5);
+      // println("Pos char x: ",player.x,"y: ",player.y);
+      println("Pos bloco x: ", player.x/32, "y: ", player.y/32, "vel char: ", (player.y+player.velChar)/32);
     }
-  }
-  else if (estadoSystem == 2){//modo batalha ohhhhh
+  } else if (estadoSystem == 2) {//modo batalha ohhhhh
     mostrarBatalha();
   }
 }
 void keyPressed() {
-  player.moverPersonagem();
-  if (key == ' ') {
-    // Avança para a próxima imagem
-    fotoAtual = (fotoAtual + 1);
-    if(fotoAtual>11){
-      contador = 0;
-      indiceDialogo++;
+  if (estadoSystem == 1) {
+    player.moverPersonagem();
+    if (key == ' ') {
+      // Avança para a próxima imagem
+      fotoAtual = (fotoAtual + 1);
+      if (fotoAtual>11) {
+        contador = 0;
+        indiceDialogo++;
+      }
     }
-  }
-  if (key == 'e') {
-    player.correr();
+    if (key == 'e') {
+      player.correr();
+    }
+  } else if (estadoSystem == 2) {
+    int opcaoSelecionada = -1;
+    if (key == 'a' || key == 'A' || key == CODED && keyCode == LEFT) {
+      opcaoSelecionada = 0;
+    } else if (key == 'b' || key == 'B' || key == CODED && keyCode == DOWN) {
+      opcaoSelecionada = 1;
+    } else if (key == 'c' || key == 'C' || key == CODED && keyCode == ENTER) {
+      opcaoSelecionada = 2;
+    } else if (key == 'd' || key == 'D' || key == CODED && keyCode == UP) {
+      opcaoSelecionada = 3;
+    } else if (key == 'e' || key == 'E' || key == CODED && keyCode == RIGHT) {
+      opcaoSelecionada = 4;
+    }
+
+    if (opcaoSelecionada >= 0 && opcaoSelecionada < opcoes.length) {
+      verificarResposta(opcoes[opcaoSelecionada]);
+    }
   }
 }
 
-void keyReleased(){
- if(key == ' ')
-   player.andar();
+void keyReleased() {
+  if (key == ' ')
+    player.andar();
 }
 
 void mousePressed() {

@@ -29,7 +29,9 @@ void acaoEspecial(int x, int y){
  else if(matrizMapa.matrizCodColisao[x][y] == 7){
    matrizMapa.mapaPart3();
    npc.acaoAtual = -1;
+   player.atualizaPos(6,1);
  }
+ println(matrizMapa.matrizCodColisao[x][y], " acao especial");
 }
 
 void story(){
@@ -48,5 +50,13 @@ void story(){
       "vamos aos calculos..."
     };
     criarDialogo(texto2, 3, npc, 4);
+  }
+  else if(partHistoria == 2){
+    npc.acaoAtual=-1;
+    npc.atualizaPos(20,20);//fora do mapa, se ele nao aparecer influencia no jogo ? omg
+    matrizMapa.mapaPart5();
+    player.atualizaPos(6,2);
+    player.interacaoPersonagem = 1;
+    partHistoria = -1;
   }
 }
