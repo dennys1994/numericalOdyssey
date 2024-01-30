@@ -39,17 +39,17 @@ void acaoEspecial(int x, int y){
  else if(matrizMapa.matrizCodColisao[x][y] == 9){
    matrizMapa.mapaPart6();
    npc.acaoAtual = -1;
-   player.atualizaPos(15,5);
+   player.atualizaPos(14,5);
  }
  else if(matrizMapa.matrizCodColisao[x][y] == 10){
    matrizMapa.mapaPart7();
    npc.acaoAtual = -1;
-   player.atualizaPos(1,5);
+   player.atualizaPos(2,5);
  }
  else if(matrizMapa.matrizCodColisao[x][y] == 11){
    matrizMapa.mapaPart8();
    npc.acaoAtual = -1;
-   player.atualizaPos(5,8);
+   player.atualizaPos(6,8);
  }
  else if(matrizMapa.matrizCodColisao[x][y] == 12){
    matrizMapa.mapaPart5();
@@ -64,7 +64,27 @@ void acaoEspecial(int x, int y){
  else if(matrizMapa.matrizCodColisao[x][y] == 14){
    matrizMapa.mapaPart5();
    npc.acaoAtual = -1;
-   player.atualizaPos(1,5);
+   player.atualizaPos(6,1);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 15){
+   matrizMapa.mapaPart9();
+   npc.acaoAtual = -1;
+   player.atualizaPos(7,8);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 16){
+   matrizMapa.mapaPart8();
+   npc.acaoAtual = -1;
+   player.atualizaPos(7,1);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 17){
+   matrizMapa.mapaPart10();
+   npc.acaoAtual = -1;
+   player.atualizaPos(4,8);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 18){
+   matrizMapa.mapaPart9();
+   npc.acaoAtual = -1;
+   player.atualizaPos(4,1);
  }
  println(matrizMapa.matrizCodColisao[x][y], " acao especial");
 }
