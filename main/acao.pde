@@ -31,6 +31,41 @@ void acaoEspecial(int x, int y){
    npc.acaoAtual = -1;
    player.atualizaPos(6,1);
  }
+ else if(matrizMapa.matrizCodColisao[x][y] == 8){
+   matrizMapa.mapaBiblioteca();
+   npc.acaoAtual = -1;
+   player.atualizaPos(7,8);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 9){
+   matrizMapa.mapaPart6();
+   npc.acaoAtual = -1;
+   player.atualizaPos(15,5);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 10){
+   matrizMapa.mapaPart7();
+   npc.acaoAtual = -1;
+   player.atualizaPos(1,5);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 11){
+   matrizMapa.mapaPart8();
+   npc.acaoAtual = -1;
+   player.atualizaPos(5,8);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 12){
+   matrizMapa.mapaPart5();
+   npc.acaoAtual = -1;
+   player.atualizaPos(2,5);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 13){
+   matrizMapa.mapaPart5();
+   npc.acaoAtual = -1;
+   player.atualizaPos(14,5);
+ }
+ else if(matrizMapa.matrizCodColisao[x][y] == 14){
+   matrizMapa.mapaPart5();
+   npc.acaoAtual = -1;
+   player.atualizaPos(1,5);
+ }
  println(matrizMapa.matrizCodColisao[x][y], " acao especial");
 }
 

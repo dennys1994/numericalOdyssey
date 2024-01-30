@@ -2,6 +2,8 @@
 int estadoSystem = 0;//estado 0 = menu ; estado 1 = jogando
 int partHistoria = 0;//para sabermos em qual parte da historia esta
 color background;
+int tempoInicio;
+
 void setup() {
   size(480, 320);
   background(255);
@@ -19,14 +21,24 @@ void setup() {
   matrizMapa.mapaPart1();
   //cria a primeira expressao matematica
   gerarExpressao();
+  //
+  tempoInicio = millis();
 }
 
 void draw() {
   background(background);
   // player.mostrar();
   if (estadoSystem == 0) {
-    mostrarTitulo();
-    mostrarMenu();
+    if (millis() - tempoInicio < 3000) {
+      mostrarCapa();
+      textAlign(CENTER, CENTER);
+      textSize(50);
+       text("CARREGANDO\n\n", width / 2, 80);
+    } else {
+      mostrarCapa();
+      mostrarTitulo();
+      mostrarMenu();
+    }
   } else if (estadoSystem == 1) {
     if (fotoAtual >= 0 && fotoAtual <= 10)
       image(introJogo[fotoAtual], 0, 0, width, height);//quando aperta SPACE troca pra proxima img
@@ -35,9 +47,10 @@ void draw() {
       acaoNpc();
       player.mostrar();
       story();
+      //escrita.escreverMapa(); funcao desativada, era para escrever no mapa observacoes quando trocasse de mapa, mas nao funcionou, arrumar futuramente...
       // rect(player.x,player.y,5,5);
       // println("Pos char x: ",player.x,"y: ",player.y);
-      println("Pos bloco x: ", player.x/32, "y: ", player.y/32, "vel char: ", (player.y+player.velChar)/32);
+      //println("Pos bloco x: ", player.x/32, "y: ", player.y/32, "vel char: ", (player.y+player.velChar)/32);
     }
   } else if (estadoSystem == 2) {//modo batalha ohhhhh
     mostrarBatalha();
