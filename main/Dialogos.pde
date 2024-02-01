@@ -6,6 +6,7 @@ int indiceDialogo = 0;
 
 void criarDialogo(String[] texto, int linhas, Personagem npcAct, int acao){//recebe o texto que o npc ira falar, o numero de linhas desse texto, qual npc, e qual acao o npc deve torma na sequencia
   if(dialogo != 0){
+    textSize(25);
     fill(255);
     rect(240,272,14*32,2*32,5);
     if(indiceDialogo == linhas){
@@ -13,7 +14,9 @@ void criarDialogo(String[] texto, int linhas, Personagem npcAct, int acao){//rec
       contador = 0;
       dialogo = 0;
       player.interacaoPersonagem = 1;
-      npcAct.acaoAtual = acao;
+      partHistoria = -1;
+      if(npcAct != null)//quando o  dialogo nao envolve NPC
+        npcAct.acaoAtual = acao;
     }
     else
       mostrarTexto(texto[indiceDialogo]);

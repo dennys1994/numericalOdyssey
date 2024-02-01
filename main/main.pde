@@ -1,6 +1,6 @@
 
 int estadoSystem = 0;//estado 0 = menu ; estado 1 = jogando
-int partHistoria = 0;//para sabermos em qual parte da historia esta
+int partHistoria = -1;//para sabermos em qual parte da historia esta
 color background;
 int tempoInicio;
 
@@ -21,8 +21,10 @@ void setup() {
   matrizMapa.mapaPart1();
   //cria a primeira expressao matematica
   gerarExpressao();
-  //
+  //usado para fazer tela de carregamento
   tempoInicio = millis();
+  //carregaer imagens das  aulas
+  carregaAulas();
 }
 
 void draw() {
@@ -33,7 +35,7 @@ void draw() {
       mostrarCapa();
       textAlign(CENTER, CENTER);
       textSize(50);
-       text("CARREGANDO\n\n", width / 2, 80);
+      text("CARREGANDO\n\n", width / 2, 80);
     } else {
       mostrarCapa();
       mostrarTitulo();
@@ -47,6 +49,20 @@ void draw() {
       acaoNpc();
       player.mostrar();
       story();
+      if (key == 'w' || key == 'W') {
+        player.andar = 1;
+        player.moverPersonagem();
+      } else if (key == 'a' || key == 'A') {
+        player.andar = 2;
+        player.moverPersonagem();
+      } else if (key == 's' || key == 'S') {
+        player.andar = 3;
+        player.moverPersonagem();
+      } else if (key == 'd' || key == 'D') {
+        player.andar = 4;
+        player.moverPersonagem();
+      }
+
       //escrita.escreverMapa(); funcao desativada, era para escrever no mapa observacoes quando trocasse de mapa, mas nao funcionou, arrumar futuramente...
       // rect(player.x,player.y,5,5);
       // println("Pos char x: ",player.x,"y: ",player.y);
@@ -54,20 +70,28 @@ void draw() {
     }
   } else if (estadoSystem == 2) {//modo batalha ohhhhh
     mostrarBatalha();
+  } else if (estadoSystem == 3) {
+    if(escolhida  == 0){
+      matrizMapa.exibirMatriz();
+      Opcoes();
+  }
+  else{
+    image(aulas[slideAtual], 0, 0, width, height);
+  }
   }
 }
 void keyPressed() {
   if (estadoSystem == 1) {
-    player.moverPersonagem();
     if (key == ' ') {
       // Avança para a próxima imagem
       fotoAtual = (fotoAtual + 1);
+      if (fotoAtual == 11 && partHistoria == -1)
+        partHistoria = 0;
       if (fotoAtual>11) {
         contador = 0;
         indiceDialogo++;
       }
-    }
-    if (key == 'e') {
+    } else  if (key == 'e') {
       player.correr();
     }
   } else if (estadoSystem == 2) {
@@ -87,12 +111,42 @@ void keyPressed() {
     if (opcaoSelecionada >= 0 && opcaoSelecionada < opcoes.length) {
       verificarResposta(opcoes[opcaoSelecionada]);
     }
+  } else if (estadoSystem == 3) {
+    // Verifica se a tecla pressionada é 'w' ou 's' e atualiza a opção selecionada
+    if (key == 'a' && opcaoSelecionada > 1) {
+      opcaoSelecionada--;
+    } else if (key == 'd' && opcaoSelecionada < 5) {
+      opcaoSelecionada++;
+    }
+    if (key == ' ' && escolhida == 0) {
+      if (opcaoSelecionada != 5) {
+        slideAtual = getInicioAulas(opcaoSelecionada);
+        escolhida = 1;
+      } else {//acao caso  palyer nao queira ver slides de aula
+        println("SAIR");
+        estadoSystem = 1;
+        player.atualizaPos(2, 7);
+        npc.acaoAtual = 7;
+        player.interacaoPersonagem = 1 ;
+      }
+    } else if (escolhida == 1  && key == ' ') {
+      slideAtual++;
+      // Verifica se chegou ao fim das aulas da opção escolhida
+      if (slideAtual > getFimAulas(opcaoSelecionada)) {
+        // Volta para o início das aulas da opção escolhida
+        escolhida = 0;
+      }
+    }
   }
 }
 
 void keyReleased() {
   if (key == ' ')
     player.andar();
+  if (key == 'a' || key == 'A' ||key == 'd' || key == 'D' || key == 's' || key == 'S' || key == 'w' || key == 'W' ) {
+    player.andar = 0;
+    key = ' ';//precisa "zerar" a variavel key;
+  }
 }
 
 void mousePressed() {

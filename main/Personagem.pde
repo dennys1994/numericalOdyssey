@@ -53,7 +53,7 @@ class Personagem {
     int RIGHT_START_FRAME = 27;
     int FRAME_RANGE = 8;
     if (this.interacaoPersonagem == 1) {
-      if (key == 'w' || key == 'W' || andar == 1) {
+      if (/*key == 'w' || key == 'W' ||*/ andar == 1) {
         if (this.frameAtual < UP_START_FRAME || this.frameAtual > UP_START_FRAME + FRAME_RANGE)
           this.frameAtual = UP_START_FRAME; // Define o quadro de movimento para cima
         else if (this.frameAtual >= UP_START_FRAME && this.frameAtual <= UP_START_FRAME + FRAME_RANGE) {
@@ -70,7 +70,7 @@ class Personagem {
               acaoEspecial(x/32, (y-velChar)/32);
         } else
           this.y = 0;
-      } else if (key == 'a' || key == 'A' || andar == 2) {
+      } else if (/*key == 'a' || key == 'A' ||*/  andar == 2) {
         if (this.frameAtual < LEFT_START_FRAME || this.frameAtual > LEFT_START_FRAME + FRAME_RANGE)
           this.frameAtual = LEFT_START_FRAME; // Define o quadro de movimento para a esquerda
         else if (this.frameAtual >= LEFT_START_FRAME && this.frameAtual <= LEFT_START_FRAME + FRAME_RANGE) {
@@ -86,7 +86,7 @@ class Personagem {
             acaoEspecial((x-velChar)/32, y/32);
         } else
           this.x = 0;
-      } else if (key == 's' || key == 'S' || andar == 3) {
+      } else if (/*key == 's' || key == 'S' ||*/  andar == 3) {
         if (this.frameAtual < DOWN_START_FRAME || this.frameAtual > DOWN_START_FRAME + FRAME_RANGE)
           this.frameAtual = DOWN_START_FRAME; // Define o quadro de movimento para baixo
         else if (player.frameAtual >= DOWN_START_FRAME && this.frameAtual <= DOWN_START_FRAME + FRAME_RANGE) {
@@ -104,7 +104,7 @@ class Personagem {
           }
         } else
           this.y = 295;
-      } else if (key == 'd' || key == 'D' || andar == 4) {
+      } else if (/*key == 'd' || key == 'D' ||*/  andar == 4) {
         if (this.frameAtual < RIGHT_START_FRAME || this.frameAtual > RIGHT_START_FRAME + FRAME_RANGE)
           this.frameAtual = RIGHT_START_FRAME; // Define o quadro de movimento para a direita
         else if (this.frameAtual >= RIGHT_START_FRAME && this.frameAtual <= RIGHT_START_FRAME + FRAME_RANGE) {
